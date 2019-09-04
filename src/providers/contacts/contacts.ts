@@ -17,6 +17,8 @@ export class ContactsProvider {
 
 
   getContacts() {
+console.log('Dentro do provide no metodo getContacts' );
+
     return new Promise(resolve => {
       this.http.get(this.apiUrl + '/contacts.json').subscribe(data => {
         resolve(data);
@@ -26,6 +28,16 @@ export class ContactsProvider {
     });
   }
 
+  getContact(id: number) {
+    return new Promise((resolve, reject) => {
+      this.http.get(this.apiUrl + '/contacts/' + id + '.json')
+    .subscribe(res => {
+        resolve(res);
+      }, (err) => {
+        reject(err);
+      });
+    });
+  }
 
 
   addContact(data) {

@@ -9,15 +9,22 @@ import { ContactsProvider } from '../../providers/contacts/contacts';
   templateUrl: 'contacts-list.html',
 })
 
+
+
 export class ContactsListPage {
   contacts: any;
   constructor(public navCtrl: NavController, public navParams: NavParams, public contactsProvider: ContactsProvider) {
 
     this.getContacts();
   }
-
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ContactsListPage');
+
+    console.log('DidLoad --> Carrega depois de fazer o donwload da pagina e manten');
+  }
+
+  ionViewDidEnter(){
+    this.getContacts();
+    console.log('DidEnter --> Carrega todas as vezes que entrar na page');
   }
 
   getContacts() {
@@ -27,5 +34,7 @@ export class ContactsListPage {
         console.log(this.contacts);
       });
   }
+
+
 
 }

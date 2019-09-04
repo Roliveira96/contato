@@ -27,10 +27,11 @@ var CreateContactPage = /** @class */ (function () {
         this.navParams = navParams;
         this.toast = toast;
         this.contactsProvider = contactsProvider;
+        this.codigo = false;
         this.model = new Contact();
         this.model.name = 'Novo contato';
         this.model.birthday = '1990-03-14';
-        this.model.employed = false;
+        this.model.employed = this.codigo;
         this.model.salary = '1500';
         this.model.gender = 'male';
     }
@@ -45,6 +46,7 @@ var CreateContactPage = /** @class */ (function () {
                 'gender': this.model.gender,
             }
         };
+        console.log("Valor do employer: " + data["employed"]);
         this.contactsProvider.addContact(data)
             .then(function (result) {
             _this.toast.create({ message: 'Contato criado' }).present();
@@ -62,7 +64,7 @@ var CreateContactPage = /** @class */ (function () {
     };
     CreateContactPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-create-contact',template:/*ion-inline-start:"/var/www/contacts/src/pages/create-contact/create-contact.html"*/'<!--\n  Generated template for the CreateContactPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  <ion-navbar>\n    <ion-title>create-contact</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <ion-list>\n    <ion-item>\n      <ion-label stacked>Nome</ion-label>\n      <ion-input type="text" name="name" [(ngModel)]="model.name"></ion-input>\n    </ion-item>\n    <!--    export class Contact {-->\n    <!--    name: string;-->\n    <!--    birthday: string;-->\n    <!--    employed: false;-->\n    <!--    salary: string;-->\n    <!--    gender: string;-->\n    <!--    }-->\n\n    <ion-item>\n      <ion-label stacked>Data de nascimento</ion-label>\n      <ion-input type="text" name="birthday" [(ngModel)]="model.birthday"></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label stacked>Emprego?</ion-label>\n      <ion-input type="select" name="employed" [(ngModel)]="model.employed"></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label stacked>salary?</ion-label>\n      <ion-input type="text" name="salary" [(ngModel)]="model.salary"></ion-input>\n    </ion-item>\n\n\n    <ion-item>\n      <ion-label stacked>Gender</ion-label>\n      <ion-input type="text" name="gender" [(ngModel)]="model.gender"></ion-input>\n    </ion-item>\n\n\n  </ion-list>\n\n\n  <button ion-button block (click)="createContact()">\n    Criar contato\n  </button>\n</ion-content>\n'/*ion-inline-end:"/var/www/contacts/src/pages/create-contact/create-contact.html"*/,
+            selector: 'page-create-contact',template:/*ion-inline-start:"/var/www/contacts/src/pages/create-contact/create-contact.html"*/'<!--\n  Generated template for the CreateContactPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  <ion-navbar>\n    <ion-title>create-contact</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <ion-list>\n    <ion-item>\n      <ion-label stacked>Nome</ion-label>\n      <ion-input type="text" name="name" [(ngModel)]="model.name"></ion-input>\n    </ion-item>\n    <!--    export class Contact {-->\n    <!--    name: string;-->\n    <!--    birthday: string;-->\n    <!--    employed: false;-->\n    <!--    salary: string;-->\n    <!--    gender: string;-->\n    <!--    }-->\n\n    <ion-item>\n      <ion-label stacked>Data de nascimento</ion-label>\n      <ion-input type="text" name="birthday" [(ngModel)]="model.birthday"></ion-input>\n    </ion-item>\n\n\n<!--    formControlName=""-->\n  <ion-input type="text" name="salary" [(ngModel)]="model.employed"></ion-input>\n\n  <div *ngIf="model.employed == true">o codigo bate</div>\n\n    <ion-list radio-group  >\n      <ion-list-header>\n        Trabalha?\n      </ion-list-header>\n\n<!--      <ion-item>-->\n<!--        <ion-label>sim</ion-label>-->\n<!--        <ion-radio [(ngModel)]="model.employed"  checked="true"  name="employed" value="true"></ion-radio>-->\n<!--      </ion-item>-->\n\n<!--      <ion-item>-->\n<!--        <ion-label>não</ion-label>-->\n<!--        <ion-radio [(ngModel)]="model.employed" name="employed" value="false"></ion-radio>-->\n<!--      </ion-item>-->\n\n\n    </ion-list>\n\n\n    <ion-item>\n      <ion-label stacked>salary?</ion-label>\n      <ion-input type="text" name="salary" [(ngModel)]="model.salary"></ion-input>\n    </ion-item>\n\n\n    <ion-item>\n      <ion-label stacked>Gender</ion-label>\n      <ion-input type="text" name="gender" [(ngModel)]="model.gender"></ion-input>\n    </ion-item>\n\n\n  </ion-list>\n\n\n  <button ion-button block (click)="createContact()">\n    Criar contato\n  </button>\n</ion-content>\n'/*ion-inline-end:"/var/www/contacts/src/pages/create-contact/create-contact.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ToastController */],
             __WEBPACK_IMPORTED_MODULE_2__providers_contacts_contacts__["a" /* ContactsProvider */]])
@@ -108,7 +110,11 @@ var ContactsListPage = /** @class */ (function () {
         this.getContacts();
     }
     ContactsListPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad ContactsListPage');
+        console.log('DidLoad --> Carrega depois de fazer o donwload da pagina e manten');
+    };
+    ContactsListPage.prototype.ionViewDidEnter = function () {
+        this.getContacts();
+        console.log('DidEnter --> Carrega todas as vezes que entrar na page');
     };
     ContactsListPage.prototype.getContacts = function () {
         var _this = this;
@@ -511,11 +517,23 @@ var ContactsProvider = /** @class */ (function () {
     }
     ContactsProvider.prototype.getContacts = function () {
         var _this = this;
+        console.log('Dentro do provide no metodo getContacts');
         return new Promise(function (resolve) {
             _this.http.get(_this.apiUrl + '/contacts.json').subscribe(function (data) {
                 resolve(data);
             }, function (err) {
                 console.log(err);
+            });
+        });
+    };
+    ContactsProvider.prototype.getContact = function (id) {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            _this.http.get(_this.apiUrl + '/contacts/' + id + '.json')
+                .subscribe(function (res) {
+                resolve(res);
+            }, function (err) {
+                reject(err);
             });
         });
     };

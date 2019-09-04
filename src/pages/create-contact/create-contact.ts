@@ -10,16 +10,15 @@ import {ContactsProvider} from '../../providers/contacts/contacts';
 })
 export class CreateContactPage {
   model: Contact;
-
+  codigo = false;
   constructor(public navCtrl: NavController, public navParams: NavParams, private toast: ToastController,
               public contactsProvider: ContactsProvider) {
     this.model = new Contact();
     this.model.name = 'Novo contato';
     this.model.birthday = '1990-03-14';
-    this.model.employed = false;
+    this.model.employed = this.codigo;
     this.model.salary = '1500';
     this.model.gender = 'male';
-
 
 
   }
@@ -35,8 +34,9 @@ export class CreateContactPage {
 
 
       }
-    };
 
+    };
+    console.log("Valor do employer: " + data["employed"]);
 
     this.contactsProvider.addContact(data)
       .then((result: any) => {
