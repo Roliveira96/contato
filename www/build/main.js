@@ -63,9 +63,20 @@ var ContactsListPage = /** @class */ (function () {
             refresher.complete();
         }, 2000);
     };
+    ContactsListPage.prototype.deleteContact = function (contact) {
+        var _this = this;
+        this.contactsProvider.destroyContact(contact.id)
+            .then(function (result) {
+            _this.toast.create({ message: 'Excluído!', duration: 3000 }).present();
+            _this.getContacts();
+        })
+            .catch(function (error) {
+            _this.toast.create({ message: error.error, duration: 3000 }).present();
+        });
+    };
     ContactsListPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-contacts-list',template:/*ion-inline-start:"/var/www/contacts/src/pages/contacts-list/contacts-list.html"*/'<!--\n  Generated template for the ContactsListPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  <ion-navbar>\n    <ion-title>ContactsList</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <ion-refresher (ionRefresh)="doRefresh($event)">\n    <ion-refresher-content></ion-refresher-content>\n  </ion-refresher>\n\n  <ion-list inset>\n    <ion-item *ngFor="let contact of contacts" (click)="openContact(contact.id)">\n      <h2>{{contact.name}}</h2>\n      <p>{{contact.gender}}</p>\n    </ion-item>\n  </ion-list>\n\n</ion-content>\n\n'/*ion-inline-end:"/var/www/contacts/src/pages/contacts-list/contacts-list.html"*/,
+            selector: 'page-contacts-list',template:/*ion-inline-start:"/var/www/contacts/src/pages/contacts-list/contacts-list.html"*/'<!--\n  Generated template for the ContactsListPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  <ion-navbar>\n    <ion-title>ContactsList</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <ion-refresher (ionRefresh)="doRefresh($event)">\n    <ion-refresher-content></ion-refresher-content>\n  </ion-refresher>\n\n\n\n  <ion-list inset>\n    <ion-item-sliding *ngFor="let contact of contacts">\n      <ion-item  (click)="openContact(contact.id)">\n        <h2>{{contact.name}}</h2>\n        <p>{{contact.gender}}</p>\n      </ion-item>\n\n      <ion-item-options side="left">\n        <button ion-button color="danger" (click)="deleteContact(contact)">\n          <ion-icon name="trash"></ion-icon>\n          Excluir\n        </button>\n      </ion-item-options>\n\n    </ion-item-sliding>\n  </ion-list>\n\n</ion-content>\n\n'/*ion-inline-end:"/var/www/contacts/src/pages/contacts-list/contacts-list.html"*/,
         }),
         __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__providers_contacts_contacts__["a" /* ContactsProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_contacts_contacts__["a" /* ContactsProvider */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ToastController */]) === "function" && _d || Object])
     ], ContactsListPage);
@@ -181,11 +192,11 @@ webpackEmptyAsyncContext.id = 113;
 
 var map = {
 	"../pages/contact-details/contact-details.module": [
-		281,
+		282,
 		0
 	],
 	"../pages/contacts-list/contacts-list.module": [
-		282,
+		281,
 		2
 	],
 	"../pages/create-contact/create-contact.module": [
@@ -435,8 +446,8 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["b" /* HttpClientModule */],
                 __WEBPACK_IMPORTED_MODULE_4_ionic_angular__["c" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* MyApp */], {}, {
                     links: [
-                        { loadChildren: '../pages/contact-details/contact-details.module#ContactDetailsPageModule', name: 'ContactDetailsPage', segment: 'contact-details', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/contacts-list/contacts-list.module#ContactsListPageModule', name: 'ContactsListPage', segment: 'contacts-list', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/contact-details/contact-details.module#ContactDetailsPageModule', name: 'ContactDetailsPage', segment: 'contact-details', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/create-contact/create-contact.module#CreateContactPageModule', name: 'CreateContactPage', segment: 'create-contact', priority: 'low', defaultHistory: [] }
                     ]
                 })
@@ -575,11 +586,23 @@ var ContactsProvider = /** @class */ (function () {
             });
         });
     };
+    ContactsProvider.prototype.destroyContact = function (id) {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            _this.http.delete(_this.apiUrl + '/contacts/' + id + '.json')
+                .subscribe(function (res) {
+                resolve(res);
+            }, function (err) {
+                reject(err);
+            });
+        });
+    };
     ContactsProvider = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */]) === "function" && _a || Object])
     ], ContactsProvider);
     return ContactsProvider;
+    var _a;
 }());
 
 //# sourceMappingURL=contacts.js.map
