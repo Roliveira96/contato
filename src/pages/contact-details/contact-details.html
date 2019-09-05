@@ -12,13 +12,19 @@
 
 <ion-content padding>
   <div *ngIf="contact" text-center>
-    <ion-item>
-      <h2>Nome: {{contact.name}}</h2>
-      <p>Sexo: {{contact.gender}}</p>
-      <p>Data de aniversário{{contact.birthday}}</p>
-      <p>Se esta empregado: {{contact.employed}}</p>
-      <p>Salário: {{contact.salary}}</p>
-    </ion-item>
+
+    <ion-card>
+      <ion-card-header>
+        {{contact.name}}
+
+      </ion-card-header>
+      <ion-card-content>
+        <p>Sexo: {{contact.gender}}</p>
+        <p>Data de aniversário{{contact.birthday}}</p>
+        <p>Se esta empregado: {{contact.employed}}</p>
+        <p>Salário: {{contact.salary}}</p></ion-card-content>
+    </ion-card>
+    
   </div>
 </ion-content>
 <!--name: string;-->
