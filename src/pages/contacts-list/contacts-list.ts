@@ -39,12 +39,21 @@ export class ContactsListPage {
   openContact(id: number) {
     this.contactsProvider.getContact(id)
       .then((result: any) => {
-        this.navCtrl.push('ContactDetailsPage',  {
+        this.navCtrl.push('ContactDetailsPage', {
           contact: result
         });
       })
       .catch((error: any) => {
-        this.toast.create({ message: error.error }).present();
+        this.toast.create({message: error.error}).present();
       });
+  }
+
+  doRefresh(refresher) {
+    console.log('Atualizando', refresher);
+    this.getContacts();
+    setTimeout(() => {
+      console.log('Sincronizado');
+      refresher.complete();
+    }, 2000);
   }
 }
