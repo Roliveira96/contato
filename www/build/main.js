@@ -1,4 +1,4 @@
-webpackJsonp([3],{
+webpackJsonp([4],{
 
 /***/ 100:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -7,7 +7,7 @@ webpackJsonp([3],{
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ContactsListPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_contacts_contacts__ = __webpack_require__(77);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_contacts_contacts__ = __webpack_require__(50);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -74,14 +74,25 @@ var ContactsListPage = /** @class */ (function () {
             _this.toast.create({ message: error.error, duration: 3000 }).present();
         });
     };
+    ContactsListPage.prototype.openEditContact = function (id) {
+        var _this = this;
+        this.contactsProvider.getContact(id)
+            .then(function (result) {
+            _this.navCtrl.push('ContactEditPage', {
+                contact: result
+            });
+        })
+            .catch(function (error) {
+            _this.toast.create({ message: error.error }).present();
+        });
+    };
     ContactsListPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-contacts-list',template:/*ion-inline-start:"/var/www/contacts/src/pages/contacts-list/contacts-list.html"*/'<!--\n  Generated template for the ContactsListPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  <ion-navbar>\n    <ion-title>ContactsList</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <ion-refresher (ionRefresh)="doRefresh($event)">\n    <ion-refresher-content></ion-refresher-content>\n  </ion-refresher>\n\n\n\n  <ion-list inset>\n    <ion-item-sliding *ngFor="let contact of contacts">\n      <ion-item  (click)="openContact(contact.id)">\n        <h2>{{contact.name}}</h2>\n        <p>{{contact.gender}}</p>\n      </ion-item>\n\n      <ion-item-options side="left">\n        <button ion-button color="danger" (click)="deleteContact(contact)">\n          <ion-icon name="trash"></ion-icon>\n          Excluir\n        </button>\n      </ion-item-options>\n\n    </ion-item-sliding>\n  </ion-list>\n\n</ion-content>\n\n'/*ion-inline-end:"/var/www/contacts/src/pages/contacts-list/contacts-list.html"*/,
+            selector: 'page-contacts-list',template:/*ion-inline-start:"/var/www/contacts/src/pages/contacts-list/contacts-list.html"*/'<!--\n  Generated template for the ContactsListPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  <ion-navbar>\n    <ion-title>ContactsList</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <ion-refresher (ionRefresh)="doRefresh($event)">\n    <ion-refresher-content></ion-refresher-content>\n  </ion-refresher>\n\n\n  <ion-list inset>\n    <ion-item-sliding *ngFor="let contact of contacts">\n      <ion-item (click)="openContact(contact.id)">\n        <h2>{{contact.name}}</h2>\n        <p>{{contact.gender}}</p>\n      </ion-item>\n\n      <ion-item-options side="left">\n\n\n        <button ion-button color="primary" (click)="openEditContact(contact.id)">\n          <ion-icon name="create"></ion-icon>\n          Editar\n        </button>\n\n        <button ion-button color="danger" (click)="deleteContact(contact)">\n          <ion-icon name="trash"></ion-icon>\n          Excluir\n        </button>\n      </ion-item-options>\n\n    </ion-item-sliding>\n  </ion-list>\n\n</ion-content>\n\n'/*ion-inline-end:"/var/www/contacts/src/pages/contacts-list/contacts-list.html"*/,
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__providers_contacts_contacts__["a" /* ContactsProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_contacts_contacts__["a" /* ContactsProvider */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ToastController */]) === "function" && _d || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_contacts_contacts__["a" /* ContactsProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ToastController */]])
     ], ContactsListPage);
     return ContactsListPage;
-    var _a, _b, _c, _d;
 }());
 
 //# sourceMappingURL=contacts-list.js.map
@@ -96,7 +107,8 @@ var ContactsListPage = /** @class */ (function () {
 /* unused harmony export Contact */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_contacts_contacts__ = __webpack_require__(77);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_contacts_contacts__ = __webpack_require__(50);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__contacts_list_contacts_list__ = __webpack_require__(100);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -109,20 +121,25 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var CreateContactPage = /** @class */ (function () {
     function CreateContactPage(navCtrl, navParams, toast, contactsProvider) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.toast = toast;
         this.contactsProvider = contactsProvider;
-        this.codigo = false;
+        this.emprego = false;
         this.model = new Contact();
         this.model.name = 'Novo contato';
         this.model.birthday = '1990-03-14';
-        this.model.employed = this.codigo;
+        this.model.employed = this.emprego;
         this.model.salary = '1500';
         this.model.gender = 'male';
     }
+    CreateContactPage.prototype.trabalha = function () {
+        console.log("Mudando o valor da variavel ");
+        this.emprego = true;
+    };
     CreateContactPage.prototype.createContact = function () {
         var _this = this;
         var data = {
@@ -137,7 +154,8 @@ var CreateContactPage = /** @class */ (function () {
         console.log("Valor do employer: " + data["employed"]);
         this.contactsProvider.addContact(data)
             .then(function (result) {
-            _this.toast.create({ message: 'Contato criado' }).present();
+            _this.toast.create({ message: 'Contato criado com susesso', duration: 3000 }).present();
+            _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__contacts_list_contacts_list__["a" /* ContactsListPage */]);
         })
             .catch(function (error) {
             _this.toast.create({
@@ -152,12 +170,12 @@ var CreateContactPage = /** @class */ (function () {
     };
     CreateContactPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-create-contact',template:/*ion-inline-start:"/var/www/contacts/src/pages/create-contact/create-contact.html"*/'<!--\n  Generated template for the CreateContactPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  <ion-navbar>\n    <ion-title>create-contact</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <ion-list>\n    <ion-item>\n      <ion-label stacked>Nome</ion-label>\n      <ion-input type="text" name="name" [(ngModel)]="model.name"></ion-input>\n    </ion-item>\n    <!--    export class Contact {-->\n    <!--    name: string;-->\n    <!--    birthday: string;-->\n    <!--    employed: false;-->\n    <!--    salary: string;-->\n    <!--    gender: string;-->\n    <!--    }-->\n\n    <ion-item>\n      <ion-label stacked>Data de nascimento</ion-label>\n      <ion-input type="text" name="birthday" [(ngModel)]="model.birthday"></ion-input>\n    </ion-item>\n\n\n<!--    formControlName=""-->\n  <ion-input type="text" name="salary" [(ngModel)]="model.employed"></ion-input>\n\n  <div *ngIf="model.employed == true">o codigo bate</div>\n\n    <ion-list radio-group  >\n      <ion-list-header>\n        Trabalha?\n      </ion-list-header>\n\n<!--      <ion-item>-->\n<!--        <ion-label>sim</ion-label>-->\n<!--        <ion-radio [(ngModel)]="model.employed"  checked="true"  name="employed" value="true"></ion-radio>-->\n<!--      </ion-item>-->\n\n<!--      <ion-item>-->\n<!--        <ion-label>não</ion-label>-->\n<!--        <ion-radio [(ngModel)]="model.employed" name="employed" value="false"></ion-radio>-->\n<!--      </ion-item>-->\n\n\n    </ion-list>\n\n\n    <ion-item>\n      <ion-label stacked>salary?</ion-label>\n      <ion-input type="text" name="salary" [(ngModel)]="model.salary"></ion-input>\n    </ion-item>\n\n\n    <ion-item>\n      <ion-label stacked>Gender</ion-label>\n      <ion-input type="text" name="gender" [(ngModel)]="model.gender"></ion-input>\n    </ion-item>\n\n\n  </ion-list>\n\n\n  <button ion-button block (click)="createContact()">\n    Criar contato\n  </button>\n</ion-content>\n'/*ion-inline-end:"/var/www/contacts/src/pages/create-contact/create-contact.html"*/,
+            selector: 'page-create-contact',template:/*ion-inline-start:"/var/www/contacts/src/pages/create-contact/create-contact.html"*/'<!--\n  Generated template for the CreateContactPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  <ion-navbar>\n    <ion-title>create-contact</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <ion-list>\n    <ion-item>\n      <ion-label stacked>Nome</ion-label>\n      <ion-input type="text" name="name" [(ngModel)]="model.name"></ion-input>\n    </ion-item>\n    <!--    export class Contact {-->\n    <!--    name: string;-->\n    <!--    birthday: string;-->\n    <!--    employed: false;-->\n    <!--    salary: string;-->\n    <!--    gender: string;-->\n    <!--    }-->\n\n    <ion-item>\n      <ion-label stacked>Data de nascimento</ion-label>\n      <ion-input type="text" name="birthday" [(ngModel)]="model.birthday"></ion-input>\n    </ion-item>\n\n\n    <!--    formControlName=""-->\n    <ion-item>\n      <ion-label>Trabalha?</ion-label>\n      <ion-checkbox [(ngModel)]="model.employed" (ionChange)="trabalha()"></ion-checkbox>\n    </ion-item>\n\n    <ion-item *ngIf="model.employed == true">\n      <ion-label stacked>Valor Salarial</ion-label>\n      <ion-input type="text" name="salary" [(ngModel)]="model.salary"></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label>Sexo?</ion-label>\n      <ion-select [(ngModel)]="model.gender">\n        <ion-option value="female">Femenino</ion-option>\n        <ion-option value="male">Masculino</ion-option>\n      </ion-select>\n    </ion-item>\n\n\n\n  </ion-list>\n\n\n  <button ion-button block (click)="createContact()">\n    Criar contato\n  </button>\n</ion-content>\n'/*ion-inline-end:"/var/www/contacts/src/pages/create-contact/create-contact.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ToastController */],
-            __WEBPACK_IMPORTED_MODULE_2__providers_contacts_contacts__["a" /* ContactsProvider */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ToastController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__providers_contacts_contacts__["a" /* ContactsProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_contacts_contacts__["a" /* ContactsProvider */]) === "function" && _d || Object])
     ], CreateContactPage);
     return CreateContactPage;
+    var _a, _b, _c, _d;
 }());
 
 var Contact = /** @class */ (function () {
@@ -192,16 +210,20 @@ webpackEmptyAsyncContext.id = 113;
 
 var map = {
 	"../pages/contact-details/contact-details.module": [
+		281,
+		1
+	],
+	"../pages/contact-edit/contact-edit.module": [
 		282,
 		0
 	],
 	"../pages/contacts-list/contacts-list.module": [
-		281,
-		2
+		283,
+		3
 	],
 	"../pages/create-contact/create-contact.module": [
-		283,
-		1
+		284,
+		2
 	]
 };
 function webpackAsyncContext(req) {
@@ -404,7 +426,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_create_contact_create_contact__ = __webpack_require__(101);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__ionic_native_status_bar__ = __webpack_require__(196);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ionic_native_splash_screen__ = __webpack_require__(199);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__providers_contacts_contacts__ = __webpack_require__(77);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__providers_contacts_contacts__ = __webpack_require__(50);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -446,8 +468,9 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["b" /* HttpClientModule */],
                 __WEBPACK_IMPORTED_MODULE_4_ionic_angular__["c" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* MyApp */], {}, {
                     links: [
-                        { loadChildren: '../pages/contacts-list/contacts-list.module#ContactsListPageModule', name: 'ContactsListPage', segment: 'contacts-list', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/contact-details/contact-details.module#ContactDetailsPageModule', name: 'ContactDetailsPage', segment: 'contact-details', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/contact-edit/contact-edit.module#ContactEditPageModule', name: 'ContactEditPage', segment: 'contact-edit', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/contacts-list/contacts-list.module#ContactsListPageModule', name: 'ContactsListPage', segment: 'contacts-list', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/create-contact/create-contact.module#CreateContactPageModule', name: 'CreateContactPage', segment: 'create-contact', priority: 'low', defaultHistory: [] }
                     ]
                 })
@@ -523,7 +546,7 @@ var MyApp = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 77:
+/***/ 50:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -597,12 +620,23 @@ var ContactsProvider = /** @class */ (function () {
             });
         });
     };
+    ContactsProvider.prototype.updateContact = function (id, data) {
+        var _this = this;
+        console.log("Dentro do updateContact");
+        return new Promise(function (resolve, reject) {
+            _this.http.put(_this.apiUrl + '/contacts/' + id + '.json', data)
+                .subscribe(function (res) {
+                resolve(res);
+            }, function (err) {
+                reject(err);
+            });
+        });
+    };
     ContactsProvider = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */]) === "function" && _a || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */]])
     ], ContactsProvider);
     return ContactsProvider;
-    var _a;
 }());
 
 //# sourceMappingURL=contacts.js.map

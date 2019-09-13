@@ -17,7 +17,7 @@ export class ContactsProvider {
 
 
   getContacts() {
-console.log('Dentro do provide no metodo getContacts' );
+    console.log('Dentro do provide no metodo getContacts');
 
     return new Promise(resolve => {
       this.http.get(this.apiUrl + '/contacts.json').subscribe(data => {
@@ -31,18 +31,18 @@ console.log('Dentro do provide no metodo getContacts' );
   getContact(id: number) {
     return new Promise((resolve, reject) => {
       this.http.get(this.apiUrl + '/contacts/' + id + '.json')
-    .subscribe(res => {
-        resolve(res);
-      }, (err) => {
-        reject(err);
-      });
+        .subscribe(res => {
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
     });
   }
 
 
   addContact(data) {
     return new Promise((resolve, reject) => {
-      this.http.post(this.apiUrl +  '/contacts.json', data)
+      this.http.post(this.apiUrl + '/contacts.json', data)
         .subscribe(res => {
           resolve(res);
         }, (err) => {
@@ -54,12 +54,25 @@ console.log('Dentro do provide no metodo getContacts' );
   destroyContact(id: number) {
     return new Promise((resolve, reject) => {
       this.http.delete(this.apiUrl + '/contacts/' + id + '.json')
-    .subscribe(res => {
-        resolve(res);
-      }, (err) => {
-        reject(err);
-      });
+        .subscribe(res => {
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
     });
   }
+
+  updateContact(id: number, data) {
+    console.log("Dentro do updateContact");
+    return new Promise((resolve, reject) => {
+      this.http.put(this.apiUrl + '/contacts/' + id + '.json', data)
+        .subscribe(res => {
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
 
 }

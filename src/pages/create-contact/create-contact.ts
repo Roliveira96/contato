@@ -1,6 +1,8 @@
 import {Component} from '@angular/core';
 import {IonicPage, NavController, NavParams, ToastController} from 'ionic-angular';
 import {ContactsProvider} from '../../providers/contacts/contacts';
+import {HomePage} from "../home/home";
+import {ContactsListPage} from "../contacts-list/contacts-list";
 
 
 @IonicPage()
@@ -10,19 +12,23 @@ import {ContactsProvider} from '../../providers/contacts/contacts';
 })
 export class CreateContactPage {
   model: Contact;
-  codigo = false;
+  emprego = false;
   constructor(public navCtrl: NavController, public navParams: NavParams, private toast: ToastController,
               public contactsProvider: ContactsProvider) {
     this.model = new Contact();
     this.model.name = 'Novo contato';
     this.model.birthday = '1990-03-14';
-    this.model.employed = this.codigo;
+    this.model.employed = this.emprego;
     this.model.salary = '1500';
     this.model.gender = 'male';
 
 
   }
 
+  trabalha(){
+    console.log("Mudando o valor da variavel ");
+    this.emprego = true;
+  }
   createContact() {
     var data = {
       'contact': {
@@ -40,7 +46,8 @@ export class CreateContactPage {
 
     this.contactsProvider.addContact(data)
       .then((result: any) => {
-        this.toast.create({message: 'Contato criado'}).present();
+        this.toast.create({message: 'Contato criado com susesso', duration:3000}).present();
+        this.navCtrl.push(ContactsListPage);
       })
       .catch((error: any) => {
         this.toast.create({

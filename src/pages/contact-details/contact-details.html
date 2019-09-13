@@ -19,10 +19,23 @@
 
       </ion-card-header>
       <ion-card-content>
-        <p>Sexo: {{contact.gender}}</p>
+
+        <div *ngIf="contact.gender == 'male'; else elseBlock">O seu contato é um Homem</div>
+        <ng-template #elseBlock>O seu contato é uma mulher</ng-template>
+
         <p>Data de aniversário{{contact.birthday}}</p>
-        <p>Se esta empregado: {{contact.employed}}</p>
-        <p>Salário: {{contact.salary}}</p></ion-card-content>
+
+        <div *ngIf="contact.employed">
+          <p>Esse contato está trabalhando</p>
+          <p>Salário: {{contact.salary}}</p>
+        </div>
+
+        <div *ngIf="!contact.employed">
+          <p>Esse contato não está trabalhando</p>
+          <p>Salário: Não tem nada, ou é filho de papai</p>
+        </div>
+
+      </ion-card-content>
     </ion-card>
 
   </div>

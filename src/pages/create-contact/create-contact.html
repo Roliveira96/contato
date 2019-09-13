@@ -30,40 +30,25 @@
     </ion-item>
 
 
-<!--    formControlName=""-->
-  <ion-input type="text" name="salary" [(ngModel)]="model.employed"></ion-input>
-
-  <div *ngIf="model.employed == true">o codigo bate</div>
-
-    <ion-list radio-group  >
-      <ion-list-header>
-        Trabalha?
-      </ion-list-header>
-
-<!--      <ion-item>-->
-<!--        <ion-label>sim</ion-label>-->
-<!--        <ion-radio [(ngModel)]="model.employed"  checked="true"  name="employed" value="true"></ion-radio>-->
-<!--      </ion-item>-->
-
-<!--      <ion-item>-->
-<!--        <ion-label>não</ion-label>-->
-<!--        <ion-radio [(ngModel)]="model.employed" name="employed" value="false"></ion-radio>-->
-<!--      </ion-item>-->
-
-
-    </ion-list>
-
-
+    <!--    formControlName=""-->
     <ion-item>
-      <ion-label stacked>salary?</ion-label>
+      <ion-label>Trabalha?</ion-label>
+      <ion-checkbox [(ngModel)]="model.employed" (ionChange)="trabalha()"></ion-checkbox>
+    </ion-item>
+
+    <ion-item *ngIf="model.employed == true">
+      <ion-label stacked>Valor Salarial</ion-label>
       <ion-input type="text" name="salary" [(ngModel)]="model.salary"></ion-input>
     </ion-item>
 
-
     <ion-item>
-      <ion-label stacked>Gender</ion-label>
-      <ion-input type="text" name="gender" [(ngModel)]="model.gender"></ion-input>
+      <ion-label>Sexo?</ion-label>
+      <ion-select [(ngModel)]="model.gender">
+        <ion-option value="female">Femenino</ion-option>
+        <ion-option value="male">Masculino</ion-option>
+      </ion-select>
     </ion-item>
+
 
 
   </ion-list>
