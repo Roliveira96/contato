@@ -8,7 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
-
+import { Camera } from '@ionic-native/camera';
 
 
 import { AboutPage } from '../pages/about/about';
@@ -54,6 +54,7 @@ import { ContactsProvider } from '../providers/contacts/contacts';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ContactsProvider,
+    Camera
   ]
 })
 export class AppModule {}

@@ -10,7 +10,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content padding >
   <div *ngIf="contact" text-center>
 
     <ion-card>
@@ -19,6 +19,7 @@
 
       </ion-card-header>
       <ion-card-content>
+        <img src="{{contact.photo}}" width="10" >
 
         <div *ngIf="contact.gender == 'male'; else elseBlock">O seu contato é um Homem</div>
         <ng-template #elseBlock>O seu contato é uma mulher</ng-template>

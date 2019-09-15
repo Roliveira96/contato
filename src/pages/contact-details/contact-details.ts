@@ -16,6 +16,7 @@ import {IonicPage, NavController, NavParams} from 'ionic-angular';
 export class ContactDetailsPage {
   contact: any;
 
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.contact = this.navParams.data.contact;
   }

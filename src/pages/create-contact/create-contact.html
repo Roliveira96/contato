@@ -50,11 +50,17 @@
     </ion-item>
 
 
-
   </ion-list>
 
 
   <button ion-button block (click)="createContact()">
     Criar contato
   </button>
+
+  <img src="{{ photo }}"/>
 </ion-content>
+<ion-footer padding>
+  <button ion-button large block (click)="takePicture()">
+    Câmera
+  </button>
+</ion-footer>

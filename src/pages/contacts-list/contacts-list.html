@@ -10,15 +10,22 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content padding class="card-background-page">
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
 
+
   <ion-list inset>
     <ion-item-sliding *ngFor="let contact of contacts">
+
+
+
+
       <ion-item (click)="openContact(contact.id)">
+        <img src="{{contact.photo}}" width="100" >
+
         <h2>{{contact.name}}</h2>
         <p>{{contact.gender}}</p>
       </ion-item>
@@ -36,6 +43,7 @@
           Excluir
         </button>
       </ion-item-options>
+
 
     </ion-item-sliding>
   </ion-list>
